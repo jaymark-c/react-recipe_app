@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import { Recipe } from './components/main/Recipe.jsx';
+import APIComponent from './components/setup/AxiosSetup.jsx';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Recipe />
     </div>
   );
 }
