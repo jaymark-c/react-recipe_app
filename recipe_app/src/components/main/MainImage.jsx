@@ -1,10 +1,16 @@
-export function MainImage(){
+import { Link } from 'react-router-dom';
+
+
+export function MainImage({title, image, alt, instructions, summary}){
     return (
         <>
         <div>  
-            <img src="https://spoonacular.com/recipeImages/716429-312x231.jpg" alt="Random Recipe"></img>
+            <h1>{title}</h1>
+            <img src={image} alt={alt}></img>
         </div>
-        <button>Get Recipe</button>
+        <Link to="/recipeInstructions" state={{instructions: instructions, summary: summary }}>
+            <button>Get Recipe</button>
+        </Link>
         </>   
     )
 }
