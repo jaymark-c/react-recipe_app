@@ -3,7 +3,7 @@
  */
 export const REQUESTLINK = {
     randomRecipe: 'random',
-    searchRecipe: 'complexSearch?cuisine=asian,american,european,italian'
+    searchRecipe: 'complexSearch?cuisine=asian,american,european,italian&number=1&instructionsRequired=true&addRecipeInstructions=true&addRecipeInformation=true'
 };
 
 /**

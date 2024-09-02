@@ -26,7 +26,6 @@ export function Recipe(){
             tempFetchItem === 'failure' ? setNoError(false) : setItem(tempFetchItem);
         }
         fetchItem();
-        console.log(item)
     }
 
     return (

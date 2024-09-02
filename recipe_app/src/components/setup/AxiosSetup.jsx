@@ -1,36 +1,5 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { REQUESTLINK, BASE_URL, API_KEY } from './SpoonacularRequests';
-
-
-/**
- * Initalize component to fetch data from the Spoonacular API.
- * @returns {JSX.Element} APIComponent
- 
-const InitialItems = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        axios.get(`${BASE_URL}${REQUESTLINK.randomRecipe}?apiKey=${API_KEY}`)
-            .then(response => {
-                setData(response.data);
-                setLoading(false);
-                console.log(response.data)
-            })
-            .catch(error => {
-                setError(error);
-                setLoading(false);
-            });
-    },[]);
-
-    if (loading)
-        return <p>Loading...</p>;
-    if (error)
-        return <p>Error!: {error.message}</p>;
-}
-*/
 
 /**
  * Switch-case for calling http
@@ -55,9 +24,21 @@ async function GetItem(...item){
         {
             try{
                 const itemToLower = item[1].toLowerCase();
-                const tempData = await axios.get(`${BASE_URL}${REQUESTLINK.searchRecipe}&query=${itemToLower}&number=2&apiKey=${API_KEY}`)
-                console.log("Search_data: \n" + tempData); 
-                return tempData; 
+                const tempData = await axios.get(`${BASE_URL}${REQUESTLINK.searchRecipe}&query=${itemToLower}&apiKey=${API_KEY}`)
+                console.log(tempData);
+                let dataInstructions = tempData.data.results[0].analyzedInstructions[0].steps; //array of steps
+                let stepsInstructions = dataInstructions.map(element => 
+                    `${element.step}<br>`).join(); //create a string of instructions
+                
+                tempData.data.results[0] = {...tempData.data.results[0], instructions: stepsInstructions}
+                let objConfig = {
+                                    data: 
+                                        {
+                                            recipes:[tempData.data.results[0]]
+                                        }
+                                };
+
+                return objConfig.data; 
             }catch(error){
                 console.log(error.message);
                 return error.message;
