@@ -26,6 +26,9 @@ async function GetItem(...item){
                 const itemToLower = item[1].toLowerCase();
                 const tempData = await axios.get(`${BASE_URL}${REQUESTLINK.searchRecipe}&query=${itemToLower}&apiKey=${API_KEY}`)
                 console.log(tempData);
+                //check if searched any
+                if(tempData.data.results.length === 0)
+                    return null;
                 let dataInstructions = tempData.data.results[0].analyzedInstructions[0].steps; //array of steps
                 let stepsInstructions = dataInstructions.map(element => 
                     `${element.step}<br>`).join(); //create a string of instructions

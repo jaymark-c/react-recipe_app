@@ -1,13 +1,31 @@
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 export function SearchBar({btnItem, btnVal, searchBtn}){
     return (
         <div>
             <form onSubmit={searchBtn}>
-                <input type="text" placeholder="Search for recipes..."></input>
+                <TextField 
+                    id="standard-basic"
+                    variant="standard" 
+                    type="text" 
+                    placeholder="Search for recipes..."
+                />
                 {' '}
-                <button type="submit">Search</button>
+                <Button 
+                    variant="outlined" 
+                    type="submit"
+                    >
+                        Search
+                </Button>
             </form>            
             {' '}
-            <button onClick={() => btnItem(!btnVal)}>Search Random</button>
+            <Button 
+                variant="outlined" 
+                onClick={() => btnItem(!btnVal)}
+            >
+                Search Random
+            </Button>
         </div>
     )
 }
